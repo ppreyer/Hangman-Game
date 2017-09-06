@@ -102,6 +102,7 @@ function displayCharacterImage() {
     document.getElementById('character').src='assets/images/mario.png';
   } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'captain falcon') {
       document.getElementById('character').src='assets/images/captain_falcon.png';
+      document.getElementById('sound').src='assets/sounds/C Falcon 1.wav';
     } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'donkey kong') {
         document.getElementById('character').src='assets/images/donkey_kong.png';
       } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'fox') {
