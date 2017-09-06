@@ -10,6 +10,12 @@ var gameObject = {
   wins: 0
 };
 
+function displayGameElements() {
+  document.getElementById('guessesLeft').innerHTML = gameObject.guessesLeft;
+  document.getElementById('wins').innerHTML = gameObject.wins;
+  document.getElementById('wrongGuesses').innerHTML = gameObject.wrongGuesses.join('');
+}
+
 // Create a function to select a character at random from the array in gameObject
 function selectCharacter() {
   // Generate a random number based on the length of the characters array in gameObject
@@ -29,19 +35,33 @@ function formatCharacter() {
   document.getElementById('currentGuess').innerHTML = gameObject.guessCharacter.join('');
 }
 
+window.onload = function() {
+  selectCharacter();
+  formatCharacter();
+  displayGameElements();
+}
+
 // Create a function to store the user's guess in the gameObject
 var letterGuess = document.onkeyup = function(event) {
-  gameObject.userGuess = event.key;
-} 
+  gameObject.userGuess = event.key; 
+  checkGuess();
+  checkGameStatus();
+  displayCharacterImage();
+  resetGame();
+}
 
-// Create a function to check if letter guessed is in the character
+
+// Create a function to check if letter guessed is in the smash bro character
 function checkGuess() {
+  if(gameObject.wrongGuesses.indexOf(gameObject.userGuess) !== -1) {
+    return 
+  }
   // Conditional - check if the letter guessed is in the selected character (string)
   if(gameObject.randomCharacter.indexOf(gameObject.userGuess) === -1) {
     // If not then push the user's guess into the wrong guess array
     gameObject.wrongGuesses.push(gameObject.userGuess);
     // Subtract one from guesses left for the user
-    guessesLeft--;
+    gameObject.guessesLeft--;
     // Display the wrong guess array as a string separated by ','
     document.getElementById('wrongGuesses').innerHTML = gameObject.wrongGuesses.join(', ');
     // Display the remaining guesses left to the user
@@ -57,7 +77,7 @@ function checkGuess() {
           gameObject.guessCharacter[j] = gameObject.userGuess;  
         }
       }
-      // Outside of the loop dispaly the correct guessed letter and turn the array into a string without any separation
+      // Outside of the loop display the correct guessed letter and turn the array into a string without any separation
       document.getElementById('currentGuess').innerHTML = gameObject.guessCharacter.join('');
     }
 }
@@ -77,6 +97,34 @@ function checkGameStatus() {
   }
 }
 
+function displayCharacterImage() {
+  if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'mario') {
+    document.getElementById('character').src='assets/images/mario.png';
+  } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'captain falcon') {
+      document.getElementById('character').src='assets/images/captain_falcon.png';
+    } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'donkey kong') {
+        document.getElementById('character').src='assets/images/donkey_kong.png';
+      } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'fox') {
+          document.getElementById('character').src='assets/images/fox.png';
+        } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'jiggly puff') {
+            document.getElementById('character').src='assets/images/jiggly_puff.png';
+          } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'kirby') {
+              document.getElementById('character').src='assets/images/kirby.png';
+             } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'link') {
+                document.getElementById('character').src='assets/images/link.png';
+              } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'luigi') {
+                    document.getElementById('character').src='assets/images/luigi.png';
+                  } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'ness') {
+                      document.getElementById('character').src='assets/images/ness.png';
+                    } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'pikachu') {
+                        document.getElementById('character').src='assets/images/pikachu.png';
+                      } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'samus') {
+                          document.getElementById('character').src='assets/images/samus.png';
+                        } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'yoshi') {
+                            document.getElementById('character').src='assets/images/yoshi.png';
+                          }
+}
+
 // Create a function to reset the appropriate values stored in the gameObject's keys
 function resetGame() {
   if(gameObject.userStatus === 'winner' || gameObject.userStatus === 'lost') {
@@ -86,6 +134,9 @@ function resetGame() {
     gameObject.userGuess = '';
     gameObject.wrongGuesses = [];
     gameObject.userStatus = '';
+    displayGameElements();
+    selectCharacter();
+    formatCharacter();
   }
 }
 
