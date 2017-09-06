@@ -1,3 +1,12 @@
+// var gameObject = {
+//   guessCharacter: [],
+//   dashCharacter: [],
+//   wins: 0,
+//   guessesLeft: 10,
+//   status: '',
+//   wrongGuesses: []
+// };
+
 // creates an array that lists all of the options to guess from as an user
 var characters = ['mario', 'donkey kong', 'link', 'samus', 'yoshi', 'kirby', 'fox', 'pikachu', 'luigi', 'captain falcon', 'ness', 'jigglypuff'];
 
@@ -13,8 +22,41 @@ var wrongGuesses = [];
 // Create a variable to store the number of guesses left
 var guessesLeft = 15;
 
+//create a variable to store the number of wins for a user
+var wins = 0;
+
+// create a variable to determine the status of the game
+var gameStatus = '';
+
 // Create a function to run when the page is loaded
 window.onload = function() {
+// creates an array that lists all of the options to guess from as an user
+characters = ['mario', 'donkey kong', 'link', 'samus', 'yoshi', 'kirby', 'fox', 'pikachu', 'luigi', 'captain falcon', 'ness', 'jigglypuff'];
+// Selects a character from the list of characters for the user to guess from
+randomCharacter = characters[Math.floor(Math.random() * characters.length)];
+// Iterate through the list of random characters
+  for(var i = 0; i < randomCharacter.length; i++) {
+    // Turn guessCharacter array into the length of the randomCharacter chosen displaying as '-'
+    guessCharacter[i] = '-';
+  }
+
+// Grab the HTML element
+var el = document.getElementById('currentGuess');
+
+// Change the HTML element to guessCharacter and turn it into a string
+el.innerHTML = guessCharacter.join('');
+
+// Grab HTML Element guessesLeft
+var numberElement = document.getElementById('guessesLeft');
+// Display current number of guesses left
+numberElement.innerHTML = guessesLeft;
+}
+
+function selectCharacter() {
+// creates an array that lists all of the options to guess from as an user
+var characters = ['mario', 'donkey kong', 'link', 'samus', 'yoshi', 'kirby', 'fox', 'pikachu', 'luigi', 'captain falcon', 'ness', 'jigglypuff'];
+// Selects a character from the list of characters for the user to guess from
+var randomCharacter = characters[Math.floor(Math.random() * characters.length)];
 // Iterate through the list of random characters
   for(var i = 0; i < randomCharacter.length; i++) {
     // Turn guessCharacter array into the length of the randomCharacter chosen displaying as '-'
@@ -71,12 +113,29 @@ for(var j = 0; j < randomCharacter.length; j++) {
   }
   // Conditional - check if each element value of guessCharacter === randomCharacter element values
   if (guessCharacter.every((v,i) => v === randomCharacter[i])) {
-    alert('You are a Super Smash Bros master!')
-  }  
+    // Alert the user they won the game
+    alert('You are a Super Smash Bros master!');
+    // Increase the number of user wins by 1
+    wins++;
+    // Update status to winner
+    gameStatus = 'winner';
+  }
+  // Conditional - check if status is a winner  
+  if (gameStatus === 'winner') {
+    // Reset key global variables
+    guessesLeft = 15;
+    wrongGuesses = [];
+    gameStatus = '';
+    selectCharacter();
+  }
     // Grab the HTML element
     var correctElement = document.getElementById('currentGuess');
     // Change the HTML element to display the word with the new letter
     correctElement.innerHTML = guessCharacter.join('');
+    // Grab the HTML element
+    var winElement = document.getElementById('wins');
+    // Change the HTML element to display the word with the new letter
+    winElement.innerHTML = wins;
 
 }
     
