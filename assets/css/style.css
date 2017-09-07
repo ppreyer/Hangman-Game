@@ -1,0 +1,17 @@
+body {
+  background: url('images/background.jpeg'); 
+  font-family: 'Roboto', sans-serif;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+.btn.btn-danger {
+  padding: 10px;
+  float: right;
+}
+
+.row {
+  margin: 0 30px;
+}

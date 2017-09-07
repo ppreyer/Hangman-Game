@@ -43,7 +43,7 @@ window.onload = function() {
 
 // Create a function to store the user's guess in the gameObject
 var letterGuess = document.onkeyup = function(event) {
-  gameObject.userGuess = event.key; 
+  gameObject.userGuess = event.key.toLowerCase();
   checkGuess();
   checkGameStatus();
   displayCharacterImage();
@@ -53,7 +53,7 @@ var letterGuess = document.onkeyup = function(event) {
 
 // Create a function to check if letter guessed is in the smash bro character
 function checkGuess() {
-  if(gameObject.wrongGuesses.indexOf(gameObject.userGuess) !== -1) {
+  if(gameObject.wrongGuesses.indexOf(gameObject.userGuess) > -1) {
     return 
   }
   // Conditional - check if the letter guessed is in the selected character (string)
@@ -63,7 +63,7 @@ function checkGuess() {
     // Subtract one from guesses left for the user
     gameObject.guessesLeft--;
     // Display the wrong guess array as a string separated by ','
-    document.getElementById('wrongGuesses').innerHTML = gameObject.wrongGuesses.join(', ');
+    document.getElementById('wrongGuesses').innerHTML = gameObject.wrongGuesses.join(', ').toUpperCase();
     // Display the remaining guesses left to the user
     document.getElementById('guessesLeft').innerHTML = gameObject.guessesLeft;
   } else {
@@ -78,7 +78,7 @@ function checkGuess() {
         }
       }
       // Outside of the loop display the correct guessed letter and turn the array into a string without any separation
-      document.getElementById('currentGuess').innerHTML = gameObject.guessCharacter.join('');
+      document.getElementById('currentGuess').innerHTML = gameObject.guessCharacter.join('').toUpperCase();
     }
 }
 
@@ -100,29 +100,40 @@ function checkGameStatus() {
 function displayCharacterImage() {
   if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'mario') {
     document.getElementById('character').src='assets/images/mario.png';
+    document.getElementById('sound').src='assets/sounds/Mario 1.wav';
   } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'captain falcon') {
       document.getElementById('character').src='assets/images/captain_falcon.png';
-      document.getElementById('sound').src='assets/sounds/C Falcon 1.wav';
+      document.getElementById('sound').src='assets/sounds/Falcon 1.wav';
     } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'donkey kong') {
         document.getElementById('character').src='assets/images/donkey_kong.png';
+        document.getElementById('sound').src='assets/sounds/Donkey Kong 1.wav';
       } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'fox') {
           document.getElementById('character').src='assets/images/fox.png';
+          document.getElementById('sound').src='assets/sounds/Fox 1.wav';
         } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'jiggly puff') {
             document.getElementById('character').src='assets/images/jiggly_puff.png';
+            document.getElementById('sound').src='assets/sounds/Jigglypuff 1.wav';
           } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'kirby') {
               document.getElementById('character').src='assets/images/kirby.png';
+              document.getElementById('sound').src='assets/sounds/Kirby 1.wav';
              } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'link') {
                 document.getElementById('character').src='assets/images/link.png';
+                document.getElementById('sound').src='assets/sounds/Link 1.wav';
               } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'luigi') {
                     document.getElementById('character').src='assets/images/luigi.png';
+                    document.getElementById('sound').src='assets/sounds/Luigi 1.wav';
                   } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'ness') {
                       document.getElementById('character').src='assets/images/ness.png';
+                      document.getElementById('sound').src='assets/sounds/Ness 1.wav';
                     } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'pikachu') {
                         document.getElementById('character').src='assets/images/pikachu.png';
+                        document.getElementById('sound').src='assets/sounds/Pikachu 1.wav';
                       } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'samus') {
                           document.getElementById('character').src='assets/images/samus.png';
+                          document.getElementById('sound').src='assets/sounds/Announcer - Samus.wav';
                         } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'yoshi') {
                             document.getElementById('character').src='assets/images/yoshi.png';
+                            document.getElementById('sound').src='assets/sounds/Yoshi 1.wav';
                           }
 }
 
@@ -141,4 +152,16 @@ function resetGame() {
   }
 }
 
+function resetButton() {
+    gameObject.guessesLeft = 10;
+    gameObject.guessCharacter = [];
+    gameObject.randomCharacter = '';
+    gameObject.userGuess = '';
+    gameObject.wrongGuesses = [];
+    gameObject.userStatus = '';
+    gameObject.wins = 0;
+    displayGameElements();
+    selectCharacter();
+    formatCharacter();
+}
 

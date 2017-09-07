@@ -3,7 +3,9 @@
 <head>
   <meta charset='UTF-8'>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Hangman-Game</title>
+  <title>SSB Hangman Game</title>
+  <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
   <link rel='stylesheet' type='text/css' href='assets/css/style.css'>
   <script type='text/javascript' src='assets/javascript/functions.js'>
   </script>
@@ -14,51 +16,69 @@
   <body>
 
   <!-- Header Image -->
-  <header id='masthead'>
-    <div class='container'>
-      <img src='#'>
+<nav class="navbar navbar-default">
+  <div class="container-fluid">
+    <div class="navbar-header">
+      <a class="navbar-brand" href="#">
+        <img alt="Brand" src="#">
+      </a>
     </div>
-  </header>
+  </div>
+</nav>
 
-  <div id='main-container' class='container'>
-    <h1> Title </h1>
-    <section class='main-section'>
-      <p>
-        Guess a letter to get started!
-      </p>
-      <p>
-        Wins
-      </p>
-      <p id='wins'>
-      </p>
-      <p>
-        Current Word
-      </p>
-      <p id='currentGuess'>
-        Placeholder text for letter guesses.
-      </p>
-      <p>
-        Number of Guesses Remaining
-      </p>
-      <p id='guessesLeft'>
-      </p>
-      <p id='wrongGuesses'>
-        Letters already guessed
-      </p>
-      <p>
-        Placeholder for letters already guessed in the round.
-      </p>
-
-    </section>
-
-    <section class='sidebar'>
+<div class='row'>
+  <div class='col-md-3'>
+  <div class="panel panel-default">
+    <div class="panel-body">
       <audio id='sound' controls autoplay hidden>
         <source src='#'>
       </audio>
       <img id='character' src='assets/images/SSBCast.jpg'>
-    </section>
-
+      </div>
+    </div>
   </div>
+  <div class='col-md-3'>
+  <div class="panel panel-default">
+    <div class="panel-body">
+      <audio id='sound' controls autoplay hidden>
+        <source src='#'>
+      </audio>
+      <img id='character' src='assets/images/SSBCast.jpg'>
+      </div>
+    </div>
+  </div>
+  <div class='col-md-6'>
+  <div class="panel panel-default">
+    <div class="panel-body">
+        <h1>Super Smash Bros Hangman</h1>
+          <p>
+            Guess a letter to get started!
+          </p>
+          <p>
+            Wins
+          </p>
+          <p id='wins'>
+          </p>
+          <p>
+            Current Word
+          </p>
+          <p id='currentGuess'>
+            Placeholder text for letter guesses.
+          </p>
+          <p>
+            Number of Guesses Remaining
+          </p>
+          <p id='guessesLeft'>
+
+          </p>
+          <p id='wrongGuesses'>
+            Letters already guessed
+          </p>
+          <button onclick='resetButton()' type="button" class="btn btn-danger" id='resetButton'>Reset Game</button>
+         </div>
+        </div>
+    </div>
+</div>
 
   <!-- Footer -->
   <footer>
