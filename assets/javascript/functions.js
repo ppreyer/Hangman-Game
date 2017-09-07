@@ -1,13 +1,14 @@
 // Create an object to store global values
 var gameObject = {
   guessesLeft: 10,
-  characters: ['mario', 'donkey kong', 'link', 'samus', 'yoshi', 'kirby', 'fox', 'pikachu', 'luigi', 'captain falcon', 'ness', 'jigglypuff'],
+  characters: ['mario', 'donkey kong', 'link', 'samus', 'yoshi', 'kirby', 'fox', 'pikachu', 'luigi', 'captain falcon', 'ness', 'jiggly puff'],
   guessCharacter: [],
   randomCharacter: '',
   userGuess: '',
   wrongGuesses: [],
   userStatus: '',
-  wins: 0
+  wins: 0,
+  difficultyLevel: 'easy'
 };
 
 function displayGameElements() {
@@ -47,6 +48,7 @@ var letterGuess = document.onkeyup = function(event) {
   checkGuess();
   checkGameStatus();
   displayCharacterImage();
+  userLoss();
   resetGame();
 }
 
@@ -99,42 +101,75 @@ function checkGameStatus() {
 
 function displayCharacterImage() {
   if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'mario') {
+    document.getElementById('title').innerHTML='MARIO - MUSHROOM KINGDOM';
     document.getElementById('character').src='assets/images/mario.png';
+    document.getElementById('map').src='assets/images/mushroom_kingdom.jpg';
     document.getElementById('sound').src='assets/sounds/Mario 1.wav';
   } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'captain falcon') {
+      document.getElementById('title').innerHTML='CAPTAIN FALCON - PLANET ZEBES';
       document.getElementById('character').src='assets/images/captain_falcon.png';
-      document.getElementById('sound').src='assets/sounds/Falcon 1.wav';
+      document.getElementById('map').src='assets/images/planet_zebes.png';
+      document.getElementById('sound').src='assets/sounds/C Falcon 1.wav';
     } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'donkey kong') {
+        document.getElementById('title').innerHTML='DONKEY KONG - CONGO JUNGLE';
         document.getElementById('character').src='assets/images/donkey_kong.png';
+        document.getElementById('map').src='assets/images/congo_jungle.png';
         document.getElementById('sound').src='assets/sounds/Donkey Kong 1.wav';
       } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'fox') {
+          document.getElementById('title').innerHTML='FOX - SECTOR Z';
           document.getElementById('character').src='assets/images/fox.png';
+          document.getElementById('map').src='assets/images/sectorz.png';
           document.getElementById('sound').src='assets/sounds/Fox 1.wav';
         } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'jiggly puff') {
+            document.getElementById('title').innerHTML='JIGGLY PUFF - SAFFRON CITY';
             document.getElementById('character').src='assets/images/jiggly_puff.png';
-            document.getElementById('sound').src='assets/sounds/Jigglypuff 1.wav';
+            document.getElementById('map').src='assets/images/saffron_city.png';
+            document.getElementById('sound').src='assets/sounds/Jigglypuff (USA) 1.wav';
           } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'kirby') {
+              document.getElementById('title').innerHTML='KIRBY - DREAM LAND';
               document.getElementById('character').src='assets/images/kirby.png';
+              document.getElementById('map').src='assets/images/dream_land.png';
               document.getElementById('sound').src='assets/sounds/Kirby 1.wav';
              } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'link') {
+                document.getElementById('title').innerHTML='LINK - HYRULE CASTLE';
                 document.getElementById('character').src='assets/images/link.png';
+                document.getElementById('map').src='assets/images/hyrule_castle.png';
                 document.getElementById('sound').src='assets/sounds/Link 1.wav';
               } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'luigi') {
+                    document.getElementById('title').innerHTML='LUIGI - PEACH CASTLE';
                     document.getElementById('character').src='assets/images/luigi.png';
+                    document.getElementById('map').src='assets/images/peach_castle.jpg';
                     document.getElementById('sound').src='assets/sounds/Luigi 1.wav';
                   } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'ness') {
+                      document.getElementById('title').innerHTML='NESS - SAFFRON CITY';
                       document.getElementById('character').src='assets/images/ness.png';
+                      document.getElementById('map').src='assets/images/saffron_city.png';
                       document.getElementById('sound').src='assets/sounds/Ness 1.wav';
                     } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'pikachu') {
+                        document.getElementById('title').innerHTML='PIKACHU - SAFFRON CITY';
                         document.getElementById('character').src='assets/images/pikachu.png';
+                        document.getElementById('map').src='assets/images/saffron_city.png';
                         document.getElementById('sound').src='assets/sounds/Pikachu 1.wav';
                       } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'samus') {
+                          document.getElementById('title').innerHTML='SAMUS - PLANET ZEBES';
                           document.getElementById('character').src='assets/images/samus.png';
+                          document.getElementById('map').src='assets/images/planet_zebes.png';
                           document.getElementById('sound').src='assets/sounds/Announcer - Samus.wav';
                         } if(gameObject.userStatus === 'winner' && gameObject.randomCharacter === 'yoshi') {
+                            document.getElementById('title').innerHTML='YOSHI - YOSHI\'S ISLAND';
                             document.getElementById('character').src='assets/images/yoshi.png';
+                            document.getElementById('map').src='assets/images/yoshi\'s_island.png';
                             document.getElementById('sound').src='assets/sounds/Yoshi 1.wav';
                           }
+}
+
+function userLoss() {
+  if(gameObject.userStatus === 'lost') {
+    document.getElementById('title').innerHTML='MASTER HAND WINS';
+    document.getElementById('character').src='assets/images/master_hand.jpg';
+    document.getElementById('map').src='assets/images/mh.png';
+    document.getElementById('sound').src='assets/sounds/Master Hand - Intro.wav';
+  }
 }
 
 // Create a function to reset the appropriate values stored in the gameObject's keys

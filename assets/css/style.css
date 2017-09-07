@@ -1,17 +1,54 @@
 body {
-  background: url('images/background.jpeg'); 
+  background-color: #222222; 
   font-family: 'Roboto', sans-serif;
+  color: white;
 }
 
 * {
   box-sizing: border-box;
 }
 
+.container-fluid {
+  background-color: #375a7f;
+}
+
+.brand {
+  color: white;
+}
+
 .btn.btn-danger {
-  padding: 10px;
   float: right;
+  margin-top: 10px;
+}
+
+.btn-group {
+  float: right;
+  padding: 10px;
 }
 
 .row {
   margin: 0 30px;
 }
+
+.panel-body {
+  background-color: #375a7f;
+}
+
+#currentGuess,
+#wins,
+#guessesLeft {
+  padding-left: 10px;
+}
+
+#wins,
+#guessesLeft {
+  width: 8%;
+  border: 2px solid;
+}
+
+#currentGuess {
+  letter-spacing: 20px;
+  text-align: left;
+}
+
+

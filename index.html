@@ -16,11 +16,17 @@
   <body>
 
   <!-- Header Image -->
-<nav class="navbar navbar-default">
+<nav class="navbar navbar-inverse">
   <div class="container-fluid">
     <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-2">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
       <a class="navbar-brand" href="#">
-        <img alt="Brand" src="#">
+      <p class='brand'>Nintendo 64</p>
       </a>
     </div>
   </div>
@@ -33,9 +39,11 @@
       <audio id='sound' controls autoplay hidden>
         <source src='#'>
       </audio>
-      <img id='character' src='assets/images/SSBCast.jpg'>
-      </div>
+         <div class='col-md-6'> 
+          <img id='character' src='assets/images/SSBCast.jpg'>
+        </div>
     </div>
+  </div>
   </div>
   <div class='col-md-3'>
   <div class="panel panel-default">
@@ -43,29 +51,31 @@
       <audio id='sound' controls autoplay hidden>
         <source src='#'>
       </audio>
-      <img id='character' src='assets/images/SSBCast.jpg'>
+      <div class='col-md-6'>
+      <img id='map' src='assets/images/SSBCast.jpg'>
+      </div>
       </div>
     </div>
   </div>
   <div class='col-md-6'>
   <div class="panel panel-default">
     <div class="panel-body">
-        <h1>Super Smash Bros Hangman</h1>
+        <h1 id='title'>Super Smash Bros Hangman</h1>
           <p>
-            Guess a letter to get started!
+            Guess a character with your keyboard!
           </p>
-          <p>
+          <p class='word'>
             Wins
           </p>
           <p id='wins'>
           </p>
-          <p>
+          <p class='word'>
             Current Word
           </p>
           <p id='currentGuess'>
             Placeholder text for letter guesses.
           </p>
-          <p>
+          <p class='word'>
             Number of Guesses Remaining
           </p>
           <p id='guessesLeft'>
@@ -74,7 +84,17 @@
           <p id='wrongGuesses'>
             Letters already guessed
           </p>
-          <button onclick='resetButton()' type="button" class="btn btn-danger" id='resetButton'>Reset Game</button>
+          <button onclick='resetButton()' class="btn btn-danger">Reset Game</a> </button>
+          <div class="btn-group">
+  <a href="#" class="btn btn-success">Success</a>
+  <a href="#" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><span class="caret"></span></a>
+  <ul class="dropdown-menu">
+    <li><a href="www.espn.com">Easy</a></li>
+    <li><a href="#">Another action</a></li>
+    <li><a href="#">Something else here</a></li>
+    <li class="divider"></li>
+  </ul>
+</div>
          </div>
         </div>
     </div>
