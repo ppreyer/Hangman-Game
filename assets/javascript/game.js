@@ -1,141 +1,219 @@
-// var gameObject = {
-//   guessCharacter: [],
-//   dashCharacter: [],
-//   wins: 0,
-//   guessesLeft: 10,
-//   status: '',
-//   wrongGuesses: []
-// };
+// Create an object to store global values
+var gameObject = {
+  guessesLeft: 10,
+  characters: ['mario', 'donkey kong', 'link', 'samus', 'yoshi', 'kirby', 'fox', 'pikachu', 'luigi', 'captain falcon', 'ness', 'jiggly puff'],
+  guessCharacter: [],
+  randomCharacter: '',
+  userGuess: '',
+  wrongGuesses: [],
+  userStatus: '',
+  wins: 0,
+  difficultyLevel: 'Easy'
+};
 
-// creates an array that lists all of the options to guess from as an user
-var characters = ['mario', 'donkey kong', 'link', 'samus', 'yoshi', 'kirby', 'fox', 'pikachu', 'luigi', 'captain falcon', 'ness', 'jigglypuff'];
-
-// Selects a character from the list of characters for the user to guess from
-var randomCharacter = characters[Math.floor(Math.random() * characters.length)];
-
-// Creates an empty array to store random character to display in HTML
-var guessCharacter = [];
-
-// Create a variable to store wrong guesses
-var wrongGuesses = [];
-
-// Create a variable to store the number of guesses left
-var guessesLeft = 15;
-
-//create a variable to store the number of wins for a user
-var wins = 0;
-
-// create a variable to determine the status of the game
-var gameStatus = '';
-
-// Create a function to run when the page is loaded
-window.onload = function() {
-// creates an array that lists all of the options to guess from as an user
-characters = ['mario', 'donkey kong', 'link', 'samus', 'yoshi', 'kirby', 'fox', 'pikachu', 'luigi', 'captain falcon', 'ness', 'jigglypuff'];
-// Selects a character from the list of characters for the user to guess from
-randomCharacter = characters[Math.floor(Math.random() * characters.length)];
-// Iterate through the list of random characters
-  for(var i = 0; i < randomCharacter.length; i++) {
-    // Turn guessCharacter array into the length of the randomCharacter chosen displaying as '-'
-    guessCharacter[i] = '-';
-  }
-
-// Grab the HTML element
-var el = document.getElementById('currentGuess');
-
-// Change the HTML element to guessCharacter and turn it into a string
-el.innerHTML = guessCharacter.join('');
-
-// Grab HTML Element guessesLeft
-var numberElement = document.getElementById('guessesLeft');
-// Display current number of guesses left
-numberElement.innerHTML = guessesLeft;
+function displayGameElements() {
+  document.getElementById('guessesLeft').innerHTML = gameObject.guessesLeft;
+  document.getElementById('wins').innerHTML = gameObject.wins;
+  document.getElementById('wrongGuesses').innerHTML = gameObject.wrongGuesses.join('');
 }
 
+// Create a function to select a character at random from the array in gameObject
 function selectCharacter() {
-// creates an array that lists all of the options to guess from as an user
-var characters = ['mario', 'donkey kong', 'link', 'samus', 'yoshi', 'kirby', 'fox', 'pikachu', 'luigi', 'captain falcon', 'ness', 'jigglypuff'];
-// Selects a character from the list of characters for the user to guess from
-var randomCharacter = characters[Math.floor(Math.random() * characters.length)];
-// Iterate through the list of random characters
-  for(var i = 0; i < randomCharacter.length; i++) {
+  // Generate a random number based on the length of the characters array in gameObject
+  var randomNumber = Math.floor(Math.random() * gameObject.characters.length);
+  // Set the randomCharacter key value equal to the index number generated above
+  gameObject.randomCharacter = gameObject.characters[randomNumber];
+}
+
+// Create a function to format the selected character into '-'
+function formatCharacter() {
+  // Iterate through the random character chosen in the gameObject
+  for(var i = 0; i < gameObject.randomCharacter.length; i++) {
     // Turn guessCharacter array into the length of the randomCharacter chosen displaying as '-'
-    guessCharacter[i] = '-';
+    gameObject.guessCharacter[i] = '-';
   }
-
-// Grab the HTML element
-var el = document.getElementById('currentGuess');
-
-// Change the HTML element to guessCharacter and turn it into a string
-el.innerHTML = guessCharacter.join('');
-
-// Grab HTML Element guessesLeft
-var numberElement = document.getElementById('guessesLeft');
-// Display current number of guesses left
-numberElement.innerHTML = guessesLeft;
+  // Grab the HTML element and turn the array of dashes into a string with no spaces
+  document.getElementById('currentGuess').innerHTML = gameObject.guessCharacter.join('');
 }
 
-// Create a function to have the user input letter guesses
-document.onkeyup = function(event) {
+window.onload = function() {
+  selectCharacter();
+  formatCharacter();
+  displayGameElements();
+}
 
-// Determines which letter was pressed by the user
-var userGuess = event.key;
- 
-// Iterate through the randomCharacter string
-for(var j = 0; j < randomCharacter.length; j++) {
-  // Create letter variable
-  var letter = randomCharacter[j];
-  // Conditional - Check if userGuess === letter
-  if(userGuess === letter) {
-    // Set guessCharacter index = userGuess
-    guessCharacter[j] = userGuess;
+// Create a function to store the user's guess in the gameObject
+var letterGuess = document.onkeyup = function(event) {
+  gameObject.userGuess = event.key.toLowerCase();
+  checkGuess();
+  checkGameStatus();
+  displayCharacterImage('mario', 'mushroom kingdom', 'assets/images/mario.png', 'assets/images/mushroom_kingdom.jpg', 'assets/sounds/Mario 1.wav');
+  displayCharacterImage('captain falcon', 'planet zebes', 'assets/images/captain_falcon.png', 'assets/images/planet_zebes.png', 'assets/sounds/C Falcon 1.wav');
+  displayCharacterImage('donkey kong', 'congo jungle', 'assets/images/donkey_kong.png', 'assets/imagescd/congo_jungle.png', 'assets/sounds/Donkey Kong 1.wav');
+  displayCharacterImage('fox', 'sector z', 'assets/images/fox.png', 'assets/images/sectorz.png', 'assets/sounds/Fox 1.wav');
+  displayCharacterImage('jiggly puff', 'saffron city', 'assets/images/jiggly_puff.png', 'assets/images/saffron_city.png', 'assets/sounds/Jigglypuff (USA) 1.wav');
+  displayCharacterImage('kirby', 'dream land', 'assets/images/kirby.png', 'assets/images/dream_land.png', 'assets/sounds/Kirby 1.wav');
+  displayCharacterImage('link', 'hyrule castle', 'assets/images/link.png', 'assets/images/hyrule_castle.png', 'assets/sounds/Link 1.wav');
+  displayCharacterImage('luigi', 'peach castle', 'assets/images/luigi.png', 'assets/images/peach_castle.jpg', 'assets/sounds/Luigi 1.wav');
+  displayCharacterImage('ness', 'saffron city', 'assets/images/ness.png', 'assets/images/saffron_city.png', 'assets/sounds/Ness 1.wav');
+  displayCharacterImage('pikachu', 'saffron city', 'assets/images/pikachu.png', 'assets/images/saffron_city.png', 'assets/sounds/Pikachu 1.wav');
+  displayCharacterImage('samus', 'planet zebes', 'assets/images/samus.png', 'assets/images/planet_zebes.png', 'assets/sounds/Announcer - Samus.wav');
+  displayCharacterImage('yoshi', 'Yoshi Island', 'assets/images/yoshi.png', 'assets/images/yoshi\'s_island.png', 'assets/sounds/Yoshi 1.wav');
+  userLoss('master hand', 'assets/images/master_hand.jpg', 'assets/images/master_hand.jpg', 'assets/sounds/Master Hand - Intro.wav');
+  resetGame();
+}
+
+
+// Create a function to check if letter guessed is in the smash bro character
+function checkGuess() {
+  if(gameObject.wrongGuesses.indexOf(gameObject.userGuess) > -1) { 
+    return;
+  // Conditional - check if the letter guessed is in the selected character (string)
+  } else if(gameObject.randomCharacter.indexOf(gameObject.userGuess) === -1) {
+    // If not then push the user's guess into the wrong guess array
+    gameObject.wrongGuesses.push(gameObject.userGuess);
+    // Subtract one from guesses left for the user
+    gameObject.guessesLeft--;
+    // Display the wrong guess array as a string separated by ','
+    document.getElementById('wrongGuesses').innerHTML = gameObject.wrongGuesses.join(', ').toUpperCase();
+    // Display the remaining guesses left to the user
+    document.getElementById('guessesLeft').innerHTML = gameObject.guessesLeft;
+  } else {
+      // Iterate through the random character string chosen stored in gameObject
+      for(var j = 0; j < gameObject.randomCharacter.length; j++) {
+        // Store each index as a letter
+        var letter = gameObject.randomCharacter[j];
+        // Conditional - check if user guess equals the letter index
+        if(gameObject.userGuess === letter) {
+          // If yes then set the index in the array filled with dashes equal to the user's guess
+          gameObject.guessCharacter[j] = gameObject.userGuess;  
+        }
+      }
+      // Outside of the loop display the correct guessed letter and turn the array into a string without any separation
+      document.getElementById('currentGuess').innerHTML = gameObject.guessCharacter.join('').toUpperCase();
     }
-  }
-  // Conditional - check if userGuess is not in the randomCharacter array
-  if(randomCharacter.indexOf(userGuess) === -1) {
-    // Push the wrong guess into the wrong guess array
-    wrongGuesses.push(userGuess);
-    // Remove one from guessesLeft
-    guessesLeft--;
-    // Grab the HTML element
-    var wrongElement = document.getElementById('wrongGuesses');
-    // Change HTML to display wrong guessed letter
-    wrongElement.innerHTML = wrongGuesses.join(', ');
-    // Grab HTML Element guessesLeft
-    numberElement = document.getElementById('guessesLeft');
-    // Display current number of guesses left
-    numberElement.innerHTML = guessesLeft;
-  }
-  // Conditional - check if there are no guesses remaining
-  if(guessesLeft === 0) {
-    // Alert the user that they lost
-    alert('Time for you to study up on characters from the best game ever!')
-  }
-  // Conditional - check if each element value of guessCharacter === randomCharacter element values
-  if (guessCharacter.every((v,i) => v === randomCharacter[i])) {
-    // Alert the user they won the game
-    alert('You are a Super Smash Bros master!');
-    // Increase the number of user wins by 1
-    wins++;
-    // Update status to winner
-    gameStatus = 'winner';
-  }
-  // Conditional - check if status is a winner  
-  if (gameStatus === 'winner') {
-    // Reset key global variables
-    guessesLeft = 15;
-    wrongGuesses = [];
-    gameStatus = '';
-    selectCharacter();
-  }
-    // Grab the HTML element
-    var correctElement = document.getElementById('currentGuess');
-    // Change the HTML element to display the word with the new letter
-    correctElement.innerHTML = guessCharacter.join('');
-    // Grab the HTML element
-    var winElement = document.getElementById('wins');
-    // Change the HTML element to display the word with the new letter
-    winElement.innerHTML = wins;
-
 }
-    
+
+// Create a function to check if the user has won or lost
+function checkGameStatus() {
+  // Conditional - check if user has any remaining guesses
+  if(gameObject.guessesLeft <= 0) {
+    // If not then change the user status to lost
+    gameObject.userStatus = 'lost';
+    // Else check if the character guess (convert to string) matches the random character selected (string)
+  } else if(gameObject.guessCharacter.join('') === gameObject.randomCharacter) {
+    // If yes then add one to the user's win count
+    gameObject.wins++;
+    // Change the user's status to winner
+    gameObject.userStatus = 'winner';
+  }
+}
+
+function displayCharacterImage(character, map, charImage, mapImage, sound) {
+  if((gameObject.userStatus === 'winner') && (gameObject.randomCharacter === character)) {
+  character = character.toUpperCase();
+  map = map.toUpperCase();
+  document.getElementById('title').innerHTML = character + ' - ' + map;
+  document.getElementById('character').src = charImage;
+  document.getElementById('map').src = mapImage;
+  document.getElementById('sound').src = sound;
+  }
+}
+
+
+
+function userLoss(character, charImage, mapImage, sound) {
+  if(gameObject.userStatus === 'lost') {
+  character = character.toUpperCase();
+  document.getElementById('title').innerHTML = character + ' - WINS';
+  document.getElementById('character').src = charImage;
+  document.getElementById('map').src = mapImage;
+  document.getElementById('sound').src = sound;
+  }
+}
+
+// Create a function to reset the appropriate values stored in the gameObject's keys
+function resetGame() {
+    if(gameObject.userStatus === 'winner' || gameObject.userStatus === 'lost') {
+    checkDifficulty();
+    displayLevel();
+    gameObject.guessCharacter = [];
+    gameObject.randomCharacter = '';
+    gameObject.userGuess = '';
+    gameObject.wrongGuesses = [];
+    gameObject.userStatus = '';
+    displayGameElements();
+    selectCharacter();
+    formatCharacter();
+  } else {
+    return;
+    }
+}
+
+function resetButton() {
+    checkDifficulty();
+    displayLevel();
+    gameObject.guessCharacter = [];
+    gameObject.randomCharacter = '';
+    gameObject.userGuess = '';
+    gameObject.wrongGuesses = [];
+    gameObject.userStatus = '';
+    gameObject.wins = 0;
+    displayGameElements();
+    selectCharacter();
+    formatCharacter();
+    getElementsByClassName('.panel-body').focus(); 
+}
+
+
+// Function to enable game level button dropdown
+$(document).ready(function(){
+    $(".btn_btn-success_dropdown-toggle").dropdown();
+});
+
+// Function to set game difficulty level
+$(document).ready(function() {
+  var easyButton = $('.easy');
+  var mediumButton = $('.medium');
+  var difficultButton = $('.difficult');
+
+  $('#easy').on('click', function(){
+          gameObject.difficultyLevel = 'Easy';
+          gameObject.guessesLeft = 10;
+          displayGuesses();
+          displayLevel();
+        })
+
+  $('#medium').on('click', function(){
+          gameObject.difficultyLevel = 'Medium';
+          gameObject.guessesLeft = 5;
+          displayGuesses();
+          displayLevel();
+        })
+
+  $('#difficult').on('click', function(){
+          gameObject.difficultyLevel = 'Hard';
+          gameObject.guessesLeft = 3;
+          displayGuesses();
+          displayLevel();
+        })
+
+})
+
+function displayGuesses() {
+  document.getElementById('guessesLeft').innerHTML = gameObject.guessesLeft;
+}
+
+function displayLevel() {
+    document.getElementById('level').innerHTML = gameObject.difficultyLevel;
+}
+
+function checkDifficulty() {
+  if(gameObject.difficultyLevel === 'Easy') {
+      gameObject.guessesLeft = 10;
+    } else if(gameObject.difficultyLevel === 'Medium') {
+      gameObject.guessesLeft = 5;
+    } else {
+      gameObject.guessesLeft = 3;
+    }
+}

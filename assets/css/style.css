@@ -34,21 +34,24 @@ body {
   background-color: #375a7f;
 }
 
-#currentGuess,
 #wins,
 #guessesLeft {
-  padding-left: 10px;
-}
-
-#wins,
-#guessesLeft {
-  width: 8%;
-  border: 2px solid;
+  width: 6%;
+  border: 2px dashed;
+  text-align: center;
+  /*padding-right: 5px;*/
+/*  margin-right: 3px;*/
 }
 
 #currentGuess {
   letter-spacing: 20px;
   text-align: left;
+}
+
+#character,
+#map {
+  width: 70%;
+  margin-left: 30px;
 }
 
 
