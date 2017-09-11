@@ -6,6 +6,8 @@
   <title>SSB Hangman Game</title>
   <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
   <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
   <link rel='stylesheet' type='text/css' href='assets/css/style.css'>
   <script type='text/javascript' src='assets/javascript/functions.js'>
   </script>
@@ -26,7 +28,7 @@
         <span class="icon-bar"></span>
       </button>
       <a class="navbar-brand" href="#">
-      <p class='brand'>Nintendo 64</p>
+      <p class='brand'>Parker Preyer</p>
       </a>
     </div>
   </div>
@@ -85,14 +87,14 @@
             Letters already guessed
           </p>
           <button onclick='resetButton()' class="btn btn-danger">Reset Game</a> </button>
-          <div class="btn-group">
-  <a href="#" class="btn btn-success">Success</a>
-  <a href="#" class="btn btn-success dropdown-toggle" data-toggle="dropdown" aria-expanded="true"><span class="caret"></span></a>
+
+<div class="btn-group">
+  <a href="#" class="btn btn-success" id='level'>Level</a>
+  <a href='#' class="btn btn-success dropdown-toggle" data-toggle="dropdown"><span class="caret"></span></a>
   <ul class="dropdown-menu">
-    <li><a href="www.espn.com">Easy</a></li>
-    <li><a href="#">Another action</a></li>
-    <li><a href="#">Something else here</a></li>
-    <li class="divider"></li>
+    <li><a href="#" id='easy'>Easy</a></li>
+    <li><a href="#" id='medium'>Medium</a></li>
+    <li><a href="#" id='difficult'>Difficult</a></li>
   </ul>
 </div>
          </div>
