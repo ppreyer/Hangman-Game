@@ -12,8 +12,16 @@ body {
   background-color: #375a7f;
 }
 
-.brand {
+span {
   color: white;
+}
+
+span:hover {
+  opacity: 0.5;
+}
+
+span:active {
+  transform: translateY(4px);
 }
 
 .btn.btn-danger {

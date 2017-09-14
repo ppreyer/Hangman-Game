@@ -11,6 +11,7 @@ var gameObject = {
   difficultyLevel: 'Easy'
 };
 
+// Function to display critical game elements on window
 function displayGameElements() {
   document.getElementById('guessesLeft').innerHTML = gameObject.guessesLeft;
   document.getElementById('wins').innerHTML = gameObject.wins;
@@ -36,20 +37,24 @@ function formatCharacter() {
   document.getElementById('currentGuess').innerHTML = gameObject.guessCharacter.join('');
 }
 
+// Create a function to select a character, format it into hangman dashes, and display game elements when the window is loaded
 window.onload = function() {
   selectCharacter();
   formatCharacter();
   displayGameElements();
 }
 
-// Create a function to store the user's guess in the gameObject
+// Create a function to store the user's guess in the gameObject to play the game
 var letterGuess = document.onkeyup = function(event) {
   gameObject.userGuess = event.key.toLowerCase();
+  // Check if the user's guess is in the word
   checkGuess();
+  // Check if the user has won or lost the game
   checkGameStatus();
+  // Display images based on win or loss
   displayCharacterImage('mario', 'mushroom kingdom', 'assets/images/mario.png', 'assets/images/mushroom_kingdom.jpg', 'assets/sounds/Mario 1.wav');
   displayCharacterImage('captain falcon', 'planet zebes', 'assets/images/captain_falcon.png', 'assets/images/planet_zebes.png', 'assets/sounds/C Falcon 1.wav');
-  displayCharacterImage('donkey kong', 'congo jungle', 'assets/images/donkey_kong.png', 'assets/imagescd/congo_jungle.png', 'assets/sounds/Donkey Kong 1.wav');
+  displayCharacterImage('donkey kong', 'congo jungle', 'assets/images/donkey_kong.png', 'assets/images/congo_jungle.png', 'assets/sounds/Donkey Kong 1.wav');
   displayCharacterImage('fox', 'sector z', 'assets/images/fox.png', 'assets/images/sectorz.png', 'assets/sounds/Fox 1.wav');
   displayCharacterImage('jiggly puff', 'saffron city', 'assets/images/jiggly_puff.png', 'assets/images/saffron_city.png', 'assets/sounds/Jigglypuff (USA) 1.wav');
   displayCharacterImage('kirby', 'dream land', 'assets/images/kirby.png', 'assets/images/dream_land.png', 'assets/sounds/Kirby 1.wav');
@@ -60,6 +65,7 @@ var letterGuess = document.onkeyup = function(event) {
   displayCharacterImage('samus', 'planet zebes', 'assets/images/samus.png', 'assets/images/planet_zebes.png', 'assets/sounds/Announcer - Samus.wav');
   displayCharacterImage('yoshi', 'Yoshi Island', 'assets/images/yoshi.png', 'assets/images/yoshi\'s_island.png', 'assets/sounds/Yoshi 1.wav');
   userLoss('master hand', 'assets/images/master_hand.jpg', 'assets/images/master_hand.jpg', 'assets/sounds/Master Hand - Intro.wav');
+  // Restart the game
   resetGame();
 }
 
@@ -109,10 +115,15 @@ function checkGameStatus() {
   }
 }
 
+// Create a function to display the correct image after the user wins the game
 function displayCharacterImage(character, map, charImage, mapImage, sound) {
+  // Conditional - if user wins and their guessed character matches the character selected
   if((gameObject.userStatus === 'winner') && (gameObject.randomCharacter === character)) {
+  // Convert letters to upper case
   character = character.toUpperCase();
+  // Convert map name to upper case
   map = map.toUpperCase();
+  // Get the appropriate HTML elements and display on window
   document.getElementById('title').innerHTML = character + ' - ' + map;
   document.getElementById('character').src = charImage;
   document.getElementById('map').src = mapImage;
@@ -121,7 +132,7 @@ function displayCharacterImage(character, map, charImage, mapImage, sound) {
 }
 
 
-
+// Function to display image on a loss -- see displayCharacterImage
 function userLoss(character, charImage, mapImage, sound) {
   if(gameObject.userStatus === 'lost') {
   character = character.toUpperCase();
@@ -150,6 +161,7 @@ function resetGame() {
     }
 }
 
+// Function to reset the game - use when someone clicks the reset button
 function resetButton() {
     checkDifficulty();
     displayLevel();
@@ -165,10 +177,13 @@ function resetButton() {
     getElementsByClassName('.panel-body').focus(); 
 }
 
-
 // Function to enable game level button dropdown
 $(document).ready(function(){
     $(".btn_btn-success_dropdown-toggle").dropdown();
+    $(".reset-button").on("click", function(){
+    $(this).blur();
+      resetButton();
+});
 });
 
 // Function to set game difficulty level
@@ -200,14 +215,17 @@ $(document).ready(function() {
 
 })
 
+// Function to display the number of guesses left
 function displayGuesses() {
   document.getElementById('guessesLeft').innerHTML = gameObject.guessesLeft;
 }
 
+// Function to display the difficulty level selected by the user
 function displayLevel() {
     document.getElementById('level').innerHTML = gameObject.difficultyLevel;
 }
 
+// Function to display certain number of guesses based on difficulty level selected
 function checkDifficulty() {
   if(gameObject.difficultyLevel === 'Easy') {
       gameObject.guessesLeft = 10;
