@@ -2,7 +2,7 @@
 
 ## Overview
 This is a Super Smash Brothers (N-64 animations) hangman application hosted on Github pages.
-You can play the game here: https://ppreyer.github.io/Hangman-Game/
+You can play the game here: https://ppreyer.github.io/hangman-game/
 
 ## Getting Started
 Select a level difficulty and press any key to begin
